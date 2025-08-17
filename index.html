@@ -1,0 +1,860 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Formulir Investigasi Insiden Bertingkat</title>
+    <!-- Memuat Tailwind CSS untuk styling -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        /* Custom scrollbar styling */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #f1f1f1;
+            border-radius: 10px;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #888;
+            border-radius: 10px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #555;
+        }
+        /* Style untuk radio button custom */
+        .radio-group label {
+            transition: all 0.2s ease-in-out;
+        }
+        .radio-group input[type="radio"]:checked + label {
+            background-color: #3b82f6; /* bg-blue-500 */
+            color: white;
+            border-color: #2563eb; /* border-blue-600 */
+        }
+        /* Utility untuk teks vertikal */
+        .vertical-text {
+            writing-mode: vertical-rl;
+            transform: rotate(180deg);
+        }
+        /* Transisi untuk kemunculan comment box */
+        .comment-container {
+            transition: all 0.3s ease-in-out;
+            max-height: 0;
+            overflow: hidden;
+        }
+        .comment-container.visible {
+            max-height: 200px; /* Atur tinggi maksimal yang cukup */
+        }
+        .sub-options-container {
+            transition: all 0.3s ease-in-out;
+            max-height: 0;
+            overflow: hidden;
+        }
+        .sub-options-container.visible {
+            max-height: 1000px; /* Cukup besar untuk menampung semua sub-opsi */
+        }
+        /* Style untuk footer yang sticky */
+        footer {
+            position: sticky;
+            bottom: 0;
+            z-index: 30;
+            background-color: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(8px);
+            border-top: 1px solid #e5e7eb; /* border-gray-200 */
+        }
+    </style>
+</head>
+<body class="bg-gray-100 font-sans text-gray-800">
+
+    <div id="app-container" class="container mx-auto p-4 md:p-8 max-w-7xl">
+        
+        <!-- Header Utama Aplikasi -->
+        <header class="bg-white p-6 rounded-xl shadow-md mb-8">
+            <h1 class="text-3xl font-bold text-gray-700 text-center">Formulir Investigasi Insiden</h1>
+            <p class="text-center text-gray-500 mt-2">Silakan lengkapi setiap tahapan dengan cermat.</p>
+        </header>
+
+        <!-- Kontainer untuk semua halaman -->
+        <main id="form-pages" class="bg-white p-6 md:p-8 rounded-xl shadow-md">
+
+            <!-- Halaman 1: Tipe Insiden -->
+            <div id="page-1" class="page">
+                <h2 class="text-2xl font-semibold mb-2 text-blue-600">Tahap 1: Type of Event</h2>
+                <p class="mb-6 text-gray-600">Isi deskripsi singkat insiden dan pilih satu atau beberapa "Type of Event" yang paling relevan.</p>
+                
+                <div class="mb-8">
+                    <label for="description" class="block text-lg font-medium text-gray-700 mb-2">Deskripsi Insiden</label>
+                    <textarea id="description" rows="5" class="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition duration-150 ease-in-out" placeholder="Tuliskan kronologi dan detail insiden di sini..." required></textarea>
+                </div>
+
+                <div id="page-1-options" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+                    <!-- Opsi akan di-generate oleh JavaScript -->
+                </div>
+            </div>
+
+            <!-- Halaman 2: Faktor Penyebab -->
+            <div id="page-2" class="page hidden">
+                <h2 class="text-2xl font-semibold mb-6 text-blue-600">Tahap 2: Direct Causes</h2>
+                
+                <div id="description-display-p2" class="sticky top-0 bg-white/95 backdrop-blur-sm z-20 py-4 border-b border-gray-200 -mx-6 px-6 md:-mx-8 md:px-8">
+                    <div class="p-4 bg-gray-50 border border-gray-200 rounded-lg">
+                        <h3 class="font-bold text-gray-700 mb-2">Deskripsi Insiden:</h3>
+                        <p class="text-gray-600 text-sm max-h-24 overflow-y-auto"></p>
+                    </div>
+                </div>
+
+                <div id="page-2-sub-options-container" class="mt-6">
+                    <!-- Konten dua kolom akan di-generate oleh JavaScript -->
+                </div>
+            </div>
+
+            <!-- Halaman 3: Root Causes -->
+            <div id="page-3" class="page hidden">
+                <h2 class="text-2xl font-semibold mb-6 text-blue-600">Tahap 3: Root Causes</h2>
+                
+                 <div id="description-display-p3" class="sticky top-0 bg-white/95 backdrop-blur-sm z-20 py-4 border-b border-gray-200 -mx-6 px-6 md:-mx-8 md:px-8">
+                    <div class="p-4 bg-gray-50 border border-gray-200 rounded-lg">
+                        <h3 class="font-bold text-gray-700 mb-2">Deskripsi Insiden:</h3>
+                        <p class="text-gray-600 text-sm max-h-24 overflow-y-auto"></p>
+                    </div>
+                </div>
+
+                <div id="page-3-sub-options-container" class="mt-6">
+                    <!-- Konten untuk Halaman 3 akan di-generate oleh JavaScript -->
+                </div>
+            </div>
+
+            <!-- Halaman 4: Corrective Actions -->
+            <div id="page-4" class="page hidden">
+                <h2 class="text-2xl font-semibold mb-6 text-blue-600">Tahap 4: Corrective Actions</h2>
+                 <div id="description-display-p4" class="sticky top-0 bg-white/95 backdrop-blur-sm z-20 py-4 border-b border-gray-200 -mx-6 px-6 md:-mx-8 md:px-8">
+                    <div class="p-4 bg-gray-50 border border-gray-200 rounded-lg">
+                        <h3 class="font-bold text-gray-700 mb-2">Deskripsi Insiden:</h3>
+                        <p class="text-gray-600 text-sm max-h-24 overflow-y-auto"></p>
+                    </div>
+                </div>
+                <div id="page-4-sub-options-container" class="mt-6">
+                    <!-- Konten untuk Halaman 4 akan di-generate oleh JavaScript -->
+                </div>
+            </div>
+
+            <!-- Halaman 5: Laporan Akhir -->
+            <div id="page-5" class="page hidden">
+                <h2 class="text-2xl font-semibold mb-6 text-blue-600">Tahap 5: Laporan Akhir</h2>
+                <div id="final-report" class="space-y-6">
+                    <!-- Konten Laporan akan di-generate oleh JavaScript -->
+                </div>
+                <!-- **UPDATED:** Tombol Aksi untuk Laporan -->
+                <div class="mt-8 pt-6 border-t flex flex-col sm:flex-row gap-4 justify-end">
+                    <button onclick="alert('Fungsionalitas pengiriman email memerlukan backend.')" class="bg-gray-600 hover:bg-gray-700 text-white font-bold py-2 px-6 rounded-lg transition duration-150 ease-in-out flex items-center justify-center gap-2">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor"><path d="M2.003 5.884L10 9.882l7.997-3.998A2 2 0 0016 4H4a2 2 0 00-1.997 1.884z" /><path d="M18 8.118l-8 4-8-4V14a2 2 0 002 2h12a2 2 0 002-2V8.118z" /></svg>
+                        Kirim Laporan ke Email
+                    </button>
+                    <button onclick="alert('Fungsionalitas download Word memerlukan library tambahan.')" class="bg-blue-600 hover:bg-blue-700 text-white font-bold py-2 px-6 rounded-lg transition duration-150 ease-in-out flex items-center justify-center gap-2">
+                         <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M3 17a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zm3.293-7.707a1 1 0 011.414 0L9 10.586V3a1 1 0 112 0v7.586l1.293-1.293a1 1 0 111.414 1.414l-3 3a1 1 0 01-1.414 0l-3-3a1 1 0 010-1.414z" clip-rule="evenodd" /></svg>
+                        Download Laporan (Word)
+                    </button>
+                </div>
+            </div>
+
+        </main>
+
+        <!-- Navigasi -->
+        <footer class="mt-8 flex justify-between items-center p-4">
+            <button id="back-btn" class="bg-gray-500 hover:bg-gray-600 text-white font-bold py-2 px-6 rounded-lg transition duration-150 ease-in-out">Kembali</button>
+            <div id="step-indicator" class="text-gray-600 font-medium">Langkah 1 dari 5</div>
+            <button id="next-btn" class="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-6 rounded-lg transition duration-150 ease-in-out">Lanjut</button>
+        </footer>
+
+    </div>
+
+    <!-- Modal untuk validasi -->
+    <div id="validation-modal" class="fixed inset-0 bg-black bg-opacity-50 z-50 hidden items-center justify-center">
+        <div class="bg-white p-8 rounded-lg shadow-xl max-w-sm w-full text-center">
+            <h3 class="text-xl font-bold text-red-600 mb-4">Peringatan</h3>
+            <p id="modal-message" class="text-gray-700 mb-6"></p>
+            <button id="close-modal-btn" class="bg-red-500 hover:bg-red-600 text-white font-bold py-2 px-6 rounded-lg">Tutup</button>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // === DATA ===
+            const APP_DATA = {
+                page1Options: [
+                    "Struck Against/Into (Running / Bumping / Colliding / Grounding / Crashing)", "Struck By (Hit By Moving Object)", "Fall from Elevation (Person/Equipment/Material)", "Fall on Same Level (Slip and Fall/Trip Over)", "Caught In, On, Between or Under", "Contact with Temperature Extremes (Heat/Cold)", "Contact with Electricity", "Exposure to Noise", "Exposure to Vibration", "Exposure to Ionising Radiation", "Mechanical Overstress (by Overload/Overpressure)", "Contact with Hazardous Substance/Dose", "Loss of Primary Containment", "Environmental Release (to Air/Water/Soil)", "Fire (Pool Fire/Jet Fire/Flash Fire)", "Explosion (Vapour Cloud/Dust/Pressure Burst/BLEVE)", "Failure of Mechanical Equipment", "Failure of Electrical System", "Failure of Instrumentation/Logic/Loop", "Failure of Civil Structure", "Abnormal Operation/Process Disturbance", "Unstable process/reaction", "Customers/Stakeholders Complaints", "Act of Violence"
+                ],
+                page2Options: [
+                    { id: 1, text: "(UA) Is equipment operated with proper authority?" }, { id: 2, text: "(UA) Is information/warning provided effectively?" }, { id: 3, text: "(UA) Is everything properly secured?" }, { id: 4, text: "(UA) Is equipment operated at the correct speed?" }, { id: 5, text: "(UA) Are critical safety devices functional?" }, { id: 6, text: "(UA) Are tools/equipment/machinery/devices in good condition?" }, { id: 7, text: "(UA) Are tools/equipment/machinery/devices operated correctly?" }, { id: 8, text: "(UA) Is servicing of equipment/machinery in operation adequate?" }, { id: 9, text: "(UA) Is the correct/proper material being used?" }, { id: 10, text: "(UA) Is Personal Protective Equipment used properly?" }, { id: 11, text: "(UA) Is loading done properly?" }, { id: 12, text: "(UA) Is placement done properly?" }, { id: 13, text: "(UA) Is lifting done properly?" }, { id: 14, text: "(UA) Is the position for the task appropriate?" }, { id: 15, text: "(UA) Is behavior appropriate?" }, { id: 16, text: "(UA) Is anyone under the influence of medicine/alcohol/drugs?" }, { id: 17, text: "(UA) Are procedures/instructions followed?" }, { id: 18, text: "(UA) Are hazards identified?" }, { id: 19, text: "(UA) Is the act by an external party standard/acceptable (under own control)?" }, { id: 20, text: "(UA) Are customer/stakeholder requirements identified?" }, { id: 21, text: "(UA) Are customer/stakeholder requirements complied with?" }, { id: 22, text: "(UA) Is there civil order (no riot, unrest, warfare)?" }, { id: 23, text: "(UA) Is there an absence of criminal activities?" }, { id: 24, text: "(UC) Is the condition of the floor/surface adequate?" }, { id: 25, text: "(UC) Are tools/equipment free of defects?" }, { id: 26, text: "(UC) Are tools/equipment correct and adequate?" }, { id: 27, text: "(UC) Is the integrity of the equipment adequate?" }, { id: 28, text: "(UC) Is detection/measurement performed effectively?" }, { id: 29, text: "(UC) Is measurement/signal conversion proper?" }, { id: 30, text: "(UC) Is the correct material used?" }, { id: 31, text: "(UC) Is the composition of material/gas correct?" }, { id: 32, text: "(UC) Is the guard/barrier adequate?" }, { id: 33, text: "(UC) Is Personal Protective Equipment adequate/proper?" }, { id: 34, text: "(UC) Is there sufficient/unrestricted space for action?" }, { id: 35, text: "(UC) Is the warning system adequate?" }, { id: 36, text: "(UC) Is the atmosphere free of flammable/explosive materials?" }, { id: 37, text: "(UC) Are hazardous materials present only with authorization?" }, { id: 38, text: "(UC) Is housekeeping/order well-maintained?" }, { id: 39, text: "(UC) Is the noise level within the threshold?" }, { id: 40, text: "(UC) Is the radiation hazard within the threshold?" }, { id: 41, text: "(UC) Is illumination sufficient and not excessive?" }, { id: 42, text: "(UC) Is vibration within the threshold?" }, { id: 43, text: "(UC) Is the temperature within limits?" }, { id: 44, text: "(UC) Is the pressure within limits?" }, { id: 45, text: "(UC) Is ventilation adequate?" }, { id: 46, text: "(UC) Is information adequate?" }, { id: 47, text: "(UC) Is exposure to adverse weather conditions avoided/managed?" }
+                ],
+                page3Options: [
+                    { id: 1, text: "Is physical/physiological capability adequate?", subOptions: ["Inappropriate height/weight/size/strength/reach, etc", "Restricted range of body movement", "Limited ability/inability to sustain body positions", "Substance sensitivity/allergy", "Sensitivities to sensory extreme (temperature/sound/etc.)", "Vision deficiency", "Hearing deficiency", "Other sensory deficiency (touch/taste/smell/balance)", "Respiratory incapacity", "Other permanent physical disability", "Temporary disability"] },
+                    { id: 2, text: "Is mental/psychological capability adequate?", subOptions: ["Fears and phobias", "Emotional disturbance", "Mental Illness", "Intelligence level", "Inability to comprehend", "Poor coordination", "Slow reaction time", "Low mechanical aptitude", "Low learning aptitude", "Memory failure/lapse"] },
+                    { id: 3, text: "Is physical/physiological stress well-managed?", subOptions: ["Injury or illness", "Fatigue due to task load or duration", "Fatigue due to lack of rest", "Fatigue due to sensory overload", "Exposure to health hazard", "Exposure to temperature extreme", "Oxygen deficiency", "Atmospheric pressure variation", "Constrained movement", "Blood sugar insufficiency", "Alcohol/Drugs/Other Self Imposed Stress"] },
+                    { id: 4, text: "Is mental/psychological stress well-managed?", subOptions: ["Emotional overload", "Fatigue due to mental task load or speed", "Extreme judgment/decision demands", "Routine/monotony/boredom/overly routine tasks", "Extreme concentration/perception demands", "\"Meaningless\"/\"degrading\" activities", "Confusing directions/demands", "Conflicting demands/directions", "Preoccupation with problems/Distraction by concern", "Frustration", "Mental illness"] },
+                    { id: 5, text: "Is competence sufficient?", subOptions: ["Inadequate experience", "Inadequate orientation/induction", "Inadequate initial training", "Inadequate update/refresher training", "Misunderstood instruction/information", "Lack of situational awareness/risk perception/risk awareness", "Inadequate initial instruction/skill training", "Inadequate practice", "Infrequent performance", "Inadequate coaching", "Inadequate review instruction"] },
+                    { id: 6, text: "Is motivation proper?", subOptions: ["Improper performance/behavior is tolerated/rewarded", "Proper performance/behavior is discouraged/punished", "Lack of incentive", "Improper production incentive", "Improper Cost Reduction Incentive", "Excessive frustration", "Inappropriate aggression", "Improper attempt to save time/effort", "Improper attempt to avoid discomfort", "Improper attempt to gain attention", "Inadequate discipline", "Inappropriate peer pressure", "Improper leadership example", "Inadequate performance feedback", "Inadequate reinforcement of proper behavior", "Abuse (intentionally)", "Misuse (unintentionally)"] },
+                    { id: 7, text: "Is the organizational structure clear?", subOptions: ["Unclear/conflicting reporting relationship", "Unclear/conflicting assignment of function/role", "Unclear/conflicting accountability/responsibility/task"] },
+                    { id: 8, text: "Is leadership adequate?", subOptions: ["Inadequate HSEQ/asset strategy", "Inadequate leadership development", "Inadequate delegation", "Inadequate standards", "Inadequate communication/ implementation of policy/ procedure/ practice", "Conflicting policy/procedure/practice", "Inadequate work/process planning/programming", "Condone deviation from policy/procedure/practice", "Condone misuse of equipment/tool", "Condone improper/inappropriate behavior", "Inadequate management information", "Inadequate monitoring/closure of audit actions"] },
+                    { id: 9, text: "Is supervision/coaching adequate?", subOptions: ["Inadequate instruction/orientation/training", "Inadequate information documents in supervision/coaching", "Lack of supervisory/management job knowledge", "Inadequate match between qualifications and job/task requirements", "Inadequate performance measurement and evaluation", "Inadequate performance feedback"] },
+                    { id: 10, text: "Is change managed effectively?", subOptions: ["Inadequate hazard identification/risk evaluation in design", "Inadequate identification of failure mode", "Inadequate evaluation of customer/stakeholder requirement", "Inadequate identification of legal requirement", "Inadequate consideration of human/ergonomic factor in design", "Inadequate design process/standard/specification/criterial", "Inadequate process control automation", "Inadequate (technical) standard/specification or absence thereof", "Inadequate review of project risk", "Inadequate monitoring of construction/fabrication/assembly", "Inadequate assessment of operational readiness", "Inadequate commissioning/handover process", "Inadequate monitoring of initial operation", "Inadequate management of change process"] },
+                    { id: 11, text: "Is supply chain management adequate?", subOptions: ["Inadequate specification on requisition/purchase order", "Inadequate research on material/equipment/tool/supply/etc", "Inadequate specification to vendor", "Inadequate mode/route of shipment", "Inadequate communication of information about hazards", "Inadequate receiving inspection/acceptance", "Improper handling of material", "Improper storage of material", "Improper transporting of material", "Inadequate shelf life/validation for re-use of materials/equipment", "Inadequate identification of material", "Improper salvage/waste disposal", "Inadequate selection of contractor/supplier"] },
+                    { id: 12, text: "Is maintenance/inspection adequate?", subOptions: ["Inadequate assessment of preventive maintenance needs", "Inadequate preventive lubrication and servicing", "Inadequate adjustment/assembly", "Inadequate preventive cleaning/resurfacing", "Inadequate communication of corrective maintenance needs", "Inadequate scheduling of maintenance work", "Inadequate assessment of repair needs", "Inadequate parts substitution/replacement", "Inadequate inspection method/interval", "Unable to inspect"] },
+                    { id: 13, text: "Is wear/tear within acceptable limits?", subOptions: ["Inadequate planning of use", "Improper decision on extension of service life", "Inadequate inspection/monitoring", "Improper loading/rate of use", "Used for wrong purpose/task/activity"] },
+                    { id: 14, text: "Are tools/equipment/machinery/devices adequate?", subOptions: ["Inadequate assessment of needs and risks", "Inadequate consideration of human factors/ergonomics", "Inadequate (supplier) standard/specification", "Incorrect measurement/detection/(process) control", "Inadequate availability of tool/equipment/machinery/device", "Inadequate inspection/repair/maintenance", "Inadequate adjustment/calibration", "Inadequate removal and replacement of unsuitable items"] },
+                    { id: 15, text: "Is product/service design effective?", subOptions: ["Inadequate assessment of needs and risks", "Inadequate product/service standard/specification/concession system", "Inadequate product/service design/development", "Inadequate product/service standard", "Inadequate product/service design validation", "Inadequate product/service design verification", "Inadequate product/service planning", "Inadequate product/service quality verification"] },
+                    { id: 16, text: "Are work/production standards adequate?", subOptions: ["Inadequate identification of requirements (regulatory/industry code/permit-to-operate)", "Inadequate risk identification/evaluation in development of standard", "Inadequate standard from supplier/contractor", "Inadequate coordination with process design when developing standard", "Inadequate employee involvement in developing standard", "Conflicting standards/improper prioritization of standards", "Inadequate publication of standard", "Inadequate distribution of standard", "Inadequate translation of appropriate language", "Improper use of language", "Inadequate training of standard", "Inadequate reinforcing of standard with signs, color codes and job aids", "Inadequate monitoring of standard compliance"] },
+                    { id: 17, text: "Is communication/information effective?", subOptions: ["Inadequate information handling", "Unclear information", "Inadequate transfer of information between processes/organizational units", "Inadequate transfer of information with client/stakeholder", "Inadequate transfer of information with authorities", "Inadequate transfer of information with suppliers/contractors/third parties", "Inadequate communication structure", "Inadequate databases/information system", "Inadequate communication method/technique used"] }
+                ],
+                page2Mapping: {
+                    "Struck Against/Into (Running / Bumping / Colliding / Grounding / Crashing)": [1, 2, 3, 4, 5, 6, 7, 14, 16, 17, 19, 22, 23, 24, 25, 26, 32, 33, 34, 35, 38, 41, 47], "Struck By (Hit By Moving Object)": [1, 2, 3, 4, 5, 6, 7, 8, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 22, 23, 24, 25, 26, 28, 32, 33, 34, 35, 41, 47], "Fall from Elevation (Person/Equipment/Material)": [2, 3, 5, 6, 7, 8, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 24, 25, 26, 32, 33, 38, 41, 47], "Fall on Same Level (Slip and Fall/Trip Over)": [4, 7, 11, 12, 13, 14, 15, 16, 17, 18, 19, 24, 25, 26, 38, 41, 47], "Caught In, On, Between or Under": [1, 2, 3, 4, 5, 6, 7, 8, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 24, 25, 26, 27, 28, 29, 32, 33, 34, 35, 38, 41, 44, 46, 47], "Contact with Temperature Extremes (Heat/Cold)": [1, 2, 3, 5, 6, 7, 8, 9, 10, 12, 14, 15, 16, 17, 18, 19, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 38, 41, 43, 44, 45, 46, 47], "Contact with Electricity": [1, 2, 3, 5, 6, 7, 8, 10, 12, 14, 15, 16, 17, 18, 19, 25, 26, 27, 28, 29, 30, 32, 33, 34, 35, 38, 41, 46, 47], "Exposure to Noise": [2, 3, 5, 6, 7, 8, 10, 12, 14, 15, 16, 17, 18, 19, 25, 26, 27, 28, 29, 32, 33, 34, 35, 38, 39, 41, 44, 46, 47], "Exposure to Vibration": [1, 2, 3, 5, 6, 7, 8, 11, 12, 14, 15, 16, 17, 18, 19, 25, 26, 27, 28, 29, 30, 32, 34, 35, 38, 41, 42, 46, 47], "Exposure to Ionising Radiation": [1, 2, 3, 5, 6, 7, 8, 10, 12, 14, 15, 16, 17, 18, 19, 25, 26, 27, 28, 29, 32, 33, 34, 35, 36, 37, 38, 40, 41, 43, 45, 46, 47], "Mechanical Overstress (by Overload/Overpressure)": [1, 2, 3, 4, 5, 6, 7, 8, 9, 11, 12, 13, 14, 17, 18, 25, 26, 28, 29, 31, 34, 35, 42, 43, 44, 46, 47], "Contact with Hazardous Substance/Dose": [1, 2, 3, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 37, 38, 41, 44, 45, 47], "Loss of Primary Containment": [1, 2, 3, 5, 6, 7, 8, 9, 11, 12, 13, 15, 16, 17, 18, 19, 25, 26, 27, 28, 29, 30, 31, 32, 34, 35, 37, 38, 42, 43, 44, 47], "Environmental Release (to Air/Water/Soil)": [1, 2, 3, 4, 5, 6, 7, 8, 9, 11, 17, 18, 19, 20, 21, 25, 26, 27, 28, 29, 30, 31, 32, 34, 35, 37, 38, 43, 44, 46, 47], "Fire (Pool Fire/Jet Fire/Flash Fire)": [1, 2, 3, 4, 5, 6, 7, 8, 9, 11, 12, 13, 14, 15, 16, 17, 18, 19, 22, 23, 25, 26, 27, 28, 29, 30, 31, 32, 35, 36, 37, 38, 40, 43, 44, 45, 46, 47], "Explosion (Vapour Cloud/Dust/Pressure Burst/BLEVE)": [1, 2, 3, 4, 5, 6, 7, 8, 9, 11, 15, 16, 17, 18, 20, 21, 22, 23, 25, 26, 27, 28, 29, 30, 31, 32, 35, 36, 37, 38, 40, 43, 44, 45, 46, 47], "Failure of Mechanical Equipment": [1, 4, 6, 9, 11, 12, 13, 17, 18, 25, 26, 28, 29, 30, 35, 37, 42, 43, 44, 46, 47], "Failure of Electrical System": [1, 4, 6, 9, 11, 12, 13, 17, 25, 26, 28, 29, 30, 35, 37, 42, 43, 45, 46, 47], "Failure of Instrumentation/Logic/Loop": [1, 4, 5, 6, 9, 11, 12, 13, 17, 25, 26, 28, 29, 30, 35, 37, 42, 43, 46, 47], "Failure of Civil Structure": [1, 2, 3, 4, 5, 6, 7, 9, 11, 12, 14, 17, 18, 25, 26, 28, 29, 30, 34, 35, 38, 42, 43, 44, 46, 47], "Abnormal Operation/Process Disturbance": [1, 2, 3, 5, 6, 7, 8, 9, 11, 12, 14, 16, 17, 18, 19, 25, 26, 27, 28, 29, 30, 31, 35, 37, 38, 40, 42, 43, 44, 46], "Unstable process/reaction": [1, 2, 3, 5, 6, 7, 8, 9, 11, 12, 13, 14, 16, 17, 18, 19, 25, 26, 27, 28, 29, 30, 31, 34, 35, 38, 40, 42, 43, 44, 46], "Customers/Stakeholders Complaints": [1, 2, 5, 6, 7, 8, 9, 10, 11, 12, 13, 15, 16, 17, 19, 20, 21, 25, 26, 27, 28, 29, 30, 31, 35, 38, 39, 40, 41, 42, 46, 47], "Act of Violence": [15, 16, 17, 18, 19, 22, 23, 32, 35]
+                },
+                page3Mapping: {
+                    1: [2, 4, 5, 6, 7, 8, 9, 14, 15, 16, 17], 2: [1, 2, 3, 4, 5, 6, 7, 8, 9, 11, 13, 16, 17], 3: [1, 2, 3, 4, 5, 6, 8, 9, 11, 13, 16, 17], 4: [2, 3, 4, 5, 6, 8, 9, 10, 14, 15, 16], 5: [2, 4, 5, 6, 7, 8, 9, 10, 12, 17], 6: [2, 3, 4, 5, 6, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17], 7: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 13, 14, 15, 16, 17], 8: [3, 4, 5, 6, 7, 8, 9, 10, 12, 13, 14, 15, 16, 17], 9: [4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17], 10: [1, 2, 3, 4, 5, 6, 8, 9, 11, 12, 13, 14, 15, 16, 17], 11: [1, 2, 3, 4, 5, 6, 8, 9, 10, 11, 12, 13, 14, 15, 16], 12: [1, 2, 3, 4, 5, 6, 8, 9, 10, 11, 12, 14, 15, 16], 13: [1, 2, 3, 4, 5, 6, 8, 9, 10, 11, 12, 14, 15, 16], 14: [1, 2, 3, 4, 5, 6, 10, 14, 15, 16, 17], 15: [2, 3, 4, 5, 6, 7, 8, 9, 16], 16: [1, 2, 3, 4, 5, 6, 8, 9, 16], 17: [1, 2, 3, 4, 5, 6, 7, 8, 9, 11, 16], 18: [3, 4, 5, 6, 7, 8, 9, 10, 12, 16], 19: [6, 7, 8, 9, 10, 11, 16, 17], 20: [4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17], 21: [4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17], 22: [3, 4, 6, 8, 9, 11, 16, 17], 23: [5, 6, 8, 11, 12, 16, 17], 24: [10, 12, 13, 14, 16, 17], 25: [8, 9, 10, 11, 12, 13, 14, 15], 26: [3, 4, 5, 6, 9, 10, 11, 12, 13, 14, 16, 17], 27: [8, 10, 11, 12, 13, 14, 15, 16], 28: [1, 2, 3, 4, 5, 6, 8, 9, 10, 12, 13, 14, 15, 16, 17], 29: [1, 2, 3, 4, 5, 6, 8, 9, 10, 12, 13, 14, 15, 16, 17], 30: [8, 9, 10, 11, 12, 13, 14, 15], 31: [8, 9, 10, 11, 12, 13, 14, 15, 16, 17], 32: [5, 8, 9, 10, 11, 12, 13, 14, 15], 33: [5, 6, 8, 9, 10, 11, 12, 13, 14, 15], 34: [8, 9, 11, 16], 35: [7, 8, 9, 10, 11, 12, 13, 14, 15, 17], 36: [5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15], 37: [5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17], 38: [6, 7, 8, 9, 10, 12, 16, 17], 39: [8, 9, 10, 11, 12, 13, 14, 15, 16, 17], 40: [8, 9, 10, 11, 12, 13, 14, 15, 16, 17], 41: [8, 9, 10, 11, 12, 13, 14, 15, 16, 17], 42: [6, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17], 43: [6, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17], 44: [6, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17], 45: [8, 9, 10, 11, 12, 13, 14, 15, 16, 17], 46: [5, 8, 9, 10, 11, 12, 17], 47: [5, 6, 8, 9, 10, 12, 13, 14, 15, 16, 17]
+                }
+            };
+
+            // === STATE MANAGEMENT ===
+            let currentPage = 1;
+            const totalPages = 5;
+            let formData = { description: '', page1Selections: [], page2Data: {}, page3Data: {}, page4Data: {} };
+
+            // === DOM ELEMENTS ===
+            const pages = document.querySelectorAll('.page');
+            const nextBtn = document.getElementById('next-btn');
+            const backBtn = document.getElementById('back-btn');
+            const stepIndicator = document.getElementById('step-indicator');
+            const page1OptionsContainer = document.getElementById('page-1-options');
+            const descriptionTextarea = document.getElementById('description');
+            const validationModal = document.getElementById('validation-modal');
+            const modalMessage = document.getElementById('modal-message');
+            const closeModalBtn = document.getElementById('close-modal-btn');
+
+            // === FUNCTIONS ===
+
+            function showModal(message) {
+                modalMessage.textContent = message;
+                validationModal.classList.remove('hidden');
+                validationModal.classList.add('flex');
+            }
+
+            function hideModal() {
+                validationModal.classList.add('hidden');
+                validationModal.classList.remove('flex');
+            }
+
+            function updateNavigation() {
+                stepIndicator.textContent = `Langkah ${currentPage} dari ${totalPages}`;
+                backBtn.classList.toggle('invisible', currentPage === 1);
+
+                if (currentPage === totalPages) {
+                    nextBtn.textContent = 'Selesai & Cetak';
+                    nextBtn.classList.remove('bg-blue-500', 'hover:bg-blue-600');
+                    nextBtn.classList.add('bg-green-500', 'hover:bg-green-600');
+                } else {
+                    nextBtn.textContent = 'Lanjut';
+                    nextBtn.classList.add('bg-blue-500', 'hover:bg-blue-600');
+                    nextBtn.classList.remove('bg-green-500', 'hover:bg-green-600');
+                }
+            }
+
+            function showPage(pageNum) {
+                pages.forEach((page, index) => {
+                    page.classList.toggle('hidden', index + 1 !== pageNum);
+                });
+                currentPage = pageNum;
+                updateNavigation();
+                window.scrollTo(0, 0);
+            }
+
+            function renderPage1() {
+                page1OptionsContainer.innerHTML = '';
+                APP_DATA.page1Options.forEach((option, index) => {
+                    const isChecked = formData.page1Selections.includes(option);
+                    const itemHTML = `
+                        <div class="flex items-center p-3 border rounded-lg hover:bg-gray-50 transition">
+                            <input id="p1-opt-${index}" type="checkbox" value="${option}" ${isChecked ? 'checked' : ''} class="h-5 w-5 text-blue-600 border-gray-300 rounded focus:ring-blue-500">
+                            <label for="p1-opt-${index}" class="ml-3 text-sm font-medium text-gray-700">${option}</label>
+                        </div>
+                    `;
+                    page1OptionsContainer.insertAdjacentHTML('beforeend', itemHTML);
+                });
+            }
+
+            function renderPage2() {
+                const descriptionDisplayDiv = document.getElementById('description-display-p2');
+                const descriptionDisplayP = descriptionDisplayDiv.querySelector('p');
+                descriptionDisplayP.textContent = formData.description || '(Tidak ada deskripsi)';
+                
+                const descriptionHeight = descriptionDisplayDiv.offsetHeight;
+
+                const subOptionsContainer = document.getElementById('page-2-sub-options-container');
+                subOptionsContainer.innerHTML = '';
+
+                formData.page1Selections.forEach(selectionText => {
+                    const sectionContainer = document.createElement('div');
+                    sectionContainer.className = 'flex border-t first:border-t-0';
+
+                    const leftPanel = document.createElement('div');
+                    leftPanel.className = 'w-16 md:w-20 flex-shrink-0';
+
+                    const stickyWrapper = document.createElement('div');
+                    stickyWrapper.className = 'sticky h-screen-minus-header flex items-center justify-center';
+                    stickyWrapper.style.top = `${descriptionHeight}px`;
+                    stickyWrapper.style.height = `calc(100vh - ${descriptionHeight}px)`;
+
+                    const title = document.createElement('h3');
+                    title.className = 'text-base font-bold text-gray-600 vertical-text text-center p-2 bg-gray-100 rounded-md';
+                    title.textContent = `${selectionText}`;
+
+                    stickyWrapper.appendChild(title);
+                    leftPanel.appendChild(stickyWrapper);
+
+                    const rightPanel = document.createElement('div');
+                    rightPanel.className = 'flex-grow p-4 border-l space-y-4';
+
+                    const subOptionIDs = APP_DATA.page2Mapping[selectionText] || [];
+                    const subOptions = APP_DATA.page2Options.filter(opt => subOptionIDs.includes(opt.id));
+
+                    subOptions.forEach(subOpt => {
+                        const savedData = formData.page2Data[selectionText]?.[subOpt.id] || { choice: 'NA', comment: '' };
+                        const subOptHTML = `
+                            <div class="p-4 border border-gray-200 rounded-lg bg-white" data-selection-text="${selectionText}" data-sub-opt-id="${subOpt.id}">
+                                <p class="font-medium text-gray-700 mb-3">${subOpt.text}</p>
+                                <div class="flex flex-col gap-4">
+                                    <div class="radio-group flex-shrink-0 flex space-x-2">
+                                        <input type="radio" id="yes-${selectionText}-${subOpt.id}" name="choice-${selectionText}-${subOpt.id}" value="YES" ${savedData.choice === 'YES' ? 'checked' : ''} class="hidden">
+                                        <label for="yes-${selectionText}-${subOpt.id}" class="cursor-pointer px-4 py-2 border rounded-md font-semibold text-sm">YES</label>
+                                        
+                                        <input type="radio" id="no-${selectionText}-${subOpt.id}" name="choice-${selectionText}-${subOpt.id}" value="NO" ${savedData.choice === 'NO' ? 'checked' : ''} class="hidden">
+                                        <label for="no-${selectionText}-${subOpt.id}" class="cursor-pointer px-4 py-2 border rounded-md font-semibold text-sm">NO</label>
+                                        
+                                        <input type="radio" id="na-${selectionText}-${subOpt.id}" name="choice-${selectionText}-${subOpt.id}" value="NA" ${savedData.choice === 'NA' ? 'checked' : ''} class="hidden">
+                                        <label for="na-${selectionText}-${subOpt.id}" class="cursor-pointer px-4 py-2 border rounded-md font-semibold text-sm">N/A</label>
+                                    </div>
+                                    <div class="comment-container ${savedData.choice === 'YES' || savedData.choice === 'NO' ? 'visible' : ''}">
+                                        <textarea class="comment-box w-full p-2 border border-gray-300 rounded-md text-sm" rows="3" placeholder="Komentar (wajib diisi jika memilih YES atau NO)" ${savedData.choice === 'YES' || savedData.choice === 'NO' ? 'required' : ''}>${savedData.comment}</textarea>
+                                    </div>
+                                </div>
+                            </div>
+                        `;
+                        rightPanel.insertAdjacentHTML('beforeend', subOptHTML);
+                    });
+
+                    sectionContainer.appendChild(leftPanel);
+                    sectionContainer.appendChild(rightPanel);
+                    subOptionsContainer.appendChild(sectionContainer);
+                });
+            }
+            
+            function renderPage3() {
+                const descriptionDisplayDiv = document.getElementById('description-display-p3');
+                const descriptionDisplayP = descriptionDisplayDiv.querySelector('p');
+                descriptionDisplayP.textContent = formData.description || '(Tidak ada deskripsi)';
+                
+                const descriptionHeight = descriptionDisplayDiv.offsetHeight;
+
+                const subOptionsContainer = document.getElementById('page-3-sub-options-container');
+                subOptionsContainer.innerHTML = '';
+
+                formData.page1Selections.forEach(selectionText => {
+                    const sectionContainer = document.createElement('div');
+                    sectionContainer.className = 'flex border-t first:border-t-0';
+
+                    const leftPanel = document.createElement('div');
+                    leftPanel.className = 'w-16 md:w-20 flex-shrink-0';
+
+                    const stickyWrapper = document.createElement('div');
+                    stickyWrapper.className = 'sticky h-screen-minus-header flex items-center justify-center';
+                    stickyWrapper.style.top = `${descriptionHeight}px`;
+                    stickyWrapper.style.height = `calc(100vh - ${descriptionHeight}px)`;
+
+                    const title = document.createElement('h3');
+                    title.className = 'text-base font-bold text-gray-600 vertical-text text-center p-2 bg-gray-100 rounded-md';
+                    title.textContent = `${selectionText}`;
+
+                    stickyWrapper.appendChild(title);
+                    leftPanel.appendChild(stickyWrapper);
+
+                    const rightPanel = document.createElement('div');
+                    rightPanel.className = 'flex-grow p-4 border-l space-y-4';
+                    
+                    const directCausesForEvent = formData.page2Data[selectionText] || {};
+                    let hasContentForRightPanel = false;
+
+                    for(const directCauseId in directCausesForEvent) {
+                        const directCauseData = directCausesForEvent[directCauseId];
+                        if (directCauseData.choice === 'NO') {
+                            hasContentForRightPanel = true;
+                            const directCauseInfo = APP_DATA.page2Options.find(opt => opt.id == directCauseId);
+                            
+                            const directCauseSection = document.createElement('div');
+                            
+                            const directCauseHeader = document.createElement('div');
+                            directCauseHeader.className = 'sticky bg-white/95 backdrop-blur-sm py-3';
+                            directCauseHeader.style.top = `${descriptionHeight}px`;
+                            directCauseHeader.innerHTML = `
+                                <div class="p-3 border border-blue-200 rounded-lg bg-blue-50/50">
+                                    <p class="font-semibold text-blue-800">Direct Cause:</p>
+                                    <p class="text-sm text-gray-700">${directCauseInfo.text}</p>
+                                    <p class="mt-1 text-xs text-gray-500 italic">Komentar: ${directCauseData.comment}</p>
+                                </div>
+                            `;
+                            directCauseSection.appendChild(directCauseHeader);
+                            
+                            const rootCauseIDs = APP_DATA.page3Mapping[directCauseId] || [];
+                            const rootCauses = APP_DATA.page3Options.filter(opt => rootCauseIDs.includes(opt.id));
+
+                            rootCauses.forEach(rootCause => {
+                                const savedData = formData.page3Data?.[selectionText]?.[directCauseId]?.[rootCause.id] || { choice: 'NA', subChoices: {} };
+                                const rootCauseContainer = document.createElement('div');
+                                rootCauseContainer.className = "p-3 mt-2 ml-4 border-l-2 border-blue-200 bg-white rounded-r-lg";
+                                rootCauseContainer.dataset.selectionText = selectionText;
+                                rootCauseContainer.dataset.directCauseId = directCauseId;
+                                rootCauseContainer.dataset.rootCauseId = rootCause.id;
+
+                                let subOptionsHTML = '';
+                                if(rootCause.subOptions && rootCause.subOptions.length > 0) {
+                                    const subOptionsList = rootCause.subOptions.map(subOpt => {
+                                        const isChecked = savedData.subChoices && savedData.subChoices[subOpt];
+                                        const comment = isChecked ? savedData.subChoices[subOpt] : '';
+                                        return `
+                                            <div class="sub-option-item flex flex-col sm:flex-row items-start space-y-2 sm:space-y-0 sm:space-x-2 py-1">
+                                                <div class="flex items-center w-full sm:w-1/2 flex-shrink-0">
+                                                    <input type="checkbox" id="subopt-${selectionText}-${directCauseId}-${rootCause.id}-${subOpt.replace(/[^a-zA-Z0-9]/g, "")}" value="${subOpt}" ${isChecked ? 'checked' : ''} class="h-4 w-4 text-indigo-600 border-gray-300 rounded focus:ring-indigo-500 mr-2">
+                                                    <label for="subopt-${selectionText}-${directCauseId}-${rootCause.id}-${subOpt.replace(/[^a-zA-Z0-9]/g, "")}" class="text-xs text-gray-700">${subOpt}</label>
+                                                </div>
+                                                <div class="comment-container w-full sm:w-1/2 ${isChecked ? 'visible' : ''}">
+                                                    <textarea class="w-full p-1 border border-gray-300 rounded-md text-xs" rows="2" placeholder="Komentar (wajib)" ${isChecked ? 'required' : ''}>${comment}</textarea>
+                                                </div>
+                                            </div>
+                                        `;
+                                    }).join('');
+                                    subOptionsHTML = `<div class="sub-options-container mt-3 pl-4 border-t pt-3 ${savedData.choice === 'NO' ? 'visible' : ''}"><div class="space-y-2">${subOptionsList}</div></div>`;
+                                }
+
+                                rootCauseContainer.innerHTML = `
+                                    <p class="font-medium text-gray-700 text-sm mb-3">${rootCause.text}</p>
+                                    <div class="flex flex-col gap-4">
+                                        <div class="radio-group flex-shrink-0 flex space-x-2">
+                                            <input type="radio" id="yes-${selectionText}-${directCauseId}-${rootCause.id}" name="choice-${selectionText}-${directCauseId}-${rootCause.id}" value="YES" ${savedData.choice === 'YES' ? 'checked' : ''} class="hidden">
+                                            <label for="yes-${selectionText}-${directCauseId}-${rootCause.id}" class="cursor-pointer px-3 py-1.5 border rounded-md font-semibold text-xs">YES</label>
+                                            
+                                            <input type="radio" id="no-${selectionText}-${directCauseId}-${rootCause.id}" name="choice-${selectionText}-${directCauseId}-${rootCause.id}" value="NO" ${savedData.choice === 'NO' ? 'checked' : ''} class="hidden">
+                                            <label for="no-${selectionText}-${directCauseId}-${rootCause.id}" class="cursor-pointer px-3 py-1.5 border rounded-md font-semibold text-xs">NO</label>
+                                            
+                                            <input type="radio" id="na-${selectionText}-${directCauseId}-${rootCause.id}" name="choice-${selectionText}-${directCauseId}-${rootCause.id}" value="NA" ${savedData.choice === 'NA' ? 'checked' : ''} class="hidden">
+                                            <label for="na-${selectionText}-${directCauseId}-${rootCause.id}" class="cursor-pointer px-3 py-1.5 border rounded-md font-semibold text-xs">N/A</label>
+                                        </div>
+                                        ${subOptionsHTML}
+                                    </div>
+                                `;
+                                directCauseSection.appendChild(rootCauseContainer);
+                            });
+                            rightPanel.appendChild(directCauseSection);
+                        }
+                    }
+
+                    if (hasContentForRightPanel) {
+                        sectionContainer.appendChild(leftPanel);
+                        sectionContainer.appendChild(rightPanel);
+                        subOptionsContainer.appendChild(sectionContainer);
+                    }
+                });
+            }
+
+            function renderPage4() {
+                const descriptionDisplayDiv = document.getElementById('description-display-p4');
+                const descriptionDisplayP = descriptionDisplayDiv.querySelector('p');
+                descriptionDisplayP.textContent = formData.description || '(Tidak ada deskripsi)';
+                
+                const descriptionHeight = descriptionDisplayDiv.offsetHeight;
+
+                const subOptionsContainer = document.getElementById('page-4-sub-options-container');
+                subOptionsContainer.innerHTML = '';
+
+                formData.page1Selections.forEach(selectionText => {
+                    const sectionContainer = document.createElement('div');
+                    sectionContainer.className = 'flex border-t first:border-t-0';
+
+                    const leftPanel = document.createElement('div');
+                    leftPanel.className = 'w-16 md:w-20 flex-shrink-0';
+
+                    const stickyWrapper = document.createElement('div');
+                    stickyWrapper.className = 'sticky h-screen-minus-header flex items-center justify-center';
+                    stickyWrapper.style.top = `${descriptionHeight}px`;
+                    stickyWrapper.style.height = `calc(100vh - ${descriptionHeight}px)`;
+
+                    const title = document.createElement('h3');
+                    title.className = 'text-base font-bold text-gray-600 vertical-text text-center p-2 bg-gray-100 rounded-md';
+                    title.textContent = `${selectionText}`;
+
+                    stickyWrapper.appendChild(title);
+                    leftPanel.appendChild(stickyWrapper);
+
+                    const rightPanel = document.createElement('div');
+                    rightPanel.className = 'flex-grow p-4 border-l space-y-6';
+                    
+                    const directCausesForEvent = formData.page2Data[selectionText] || {};
+                    let hasContentForRightPanel = false;
+
+                    for(const directCauseId in directCausesForEvent) {
+                        const rootCausesForDirectCause = formData.page3Data?.[selectionText]?.[directCauseId] || {};
+                        for(const rootCauseId in rootCausesForDirectCause) {
+                            const rootCauseData = rootCausesForDirectCause[rootCauseId];
+
+                            if (rootCauseData.choice === 'NO' && rootCauseData.subChoices && Object.keys(rootCauseData.subChoices).length > 0) {
+                                hasContentForRightPanel = true;
+                                const directCauseInfo = APP_DATA.page2Options.find(opt => opt.id == directCauseId);
+                                const rootCauseInfo = APP_DATA.page3Options.find(opt => opt.id == rootCauseId);
+                                const savedData = formData.page4Data?.[selectionText]?.[directCauseId]?.[rootCauseId] || { correctiveAction: '', pic: '', targetDate: '' };
+
+                                const correctiveActionSection = document.createElement('div');
+                                correctiveActionSection.className = "p-4 border border-green-200 rounded-lg bg-green-50/50";
+                                correctiveActionSection.dataset.selectionText = selectionText;
+                                correctiveActionSection.dataset.directCauseId = directCauseId;
+                                correctiveActionSection.dataset.rootCauseId = rootCauseId;
+
+                                const subChoicesList = Object.entries(rootCauseData.subChoices).map(([subChoice, comment]) => 
+                                    `<li class="text-xs text-gray-600"><span class="font-semibold">${subChoice}:</span> ${comment}</li>`
+                                ).join('');
+
+                                correctiveActionSection.innerHTML = `
+                                    <div class="mb-4">
+                                        <p class="text-xs text-gray-500">Direct Cause:</p>
+                                        <p class="font-semibold text-sm text-gray-800">${directCauseInfo.text}</p>
+                                        <p class="text-xs text-gray-500 mt-2">Root Cause:</p>
+                                        <p class="font-semibold text-sm text-gray-800">${rootCauseInfo.text}</p>
+                                        <p class="text-xs text-gray-500 mt-2">Detail Sub-Pilihan:</p>
+                                        <ul class="list-disc list-inside mt-1">${subChoicesList}</ul>
+                                    </div>
+                                    <div class="space-y-3">
+                                        <div>
+                                            <label class="block text-sm font-medium text-gray-700 mb-1">Tindakan Perbaikan (Corrective Action)</label>
+                                            <textarea class="w-full p-2 border border-gray-300 rounded-md text-sm" rows="3" required>${savedData.correctiveAction}</textarea>
+                                        </div>
+                                        <div>
+                                            <label class="block text-sm font-medium text-gray-700 mb-1">Penanggung Jawab (Person in Charge)</label>
+                                            <input type="text" value="${savedData.pic}" class="w-full p-2 border border-gray-300 rounded-md text-sm" required>
+                                        </div>
+                                        <div>
+                                            <label class="block text-sm font-medium text-gray-700 mb-1">Target Tanggal Selesai (Target Completion Date)</label>
+                                            <input type="date" value="${savedData.targetDate}" class="w-full p-2 border border-gray-300 rounded-md text-sm" required>
+                                        </div>
+                                    </div>
+                                `;
+                                rightPanel.appendChild(correctiveActionSection);
+                            }
+                        }
+                    }
+                    if (hasContentForRightPanel) {
+                        sectionContainer.appendChild(leftPanel);
+                        sectionContainer.appendChild(rightPanel);
+                        subOptionsContainer.appendChild(sectionContainer);
+                    }
+                });
+            }
+
+            function renderFinalReport() {
+                const reportContainer = document.getElementById('final-report');
+                let reportHTML = `
+                    <div class="p-4 border rounded-lg bg-gray-50">
+                        <h3 class="font-bold text-xl mb-2 text-gray-800">Deskripsi Insiden</h3>
+                        <p class="text-gray-700 whitespace-pre-wrap">${formData.description}</p>
+                    </div>
+                `;
+
+                let analysisHTML = '';
+                formData.page1Selections.forEach(selectionText => {
+                    let eventHTML = `<div class="mt-4 p-4 border rounded-lg">`;
+                    eventHTML += `<h4 class="font-bold text-lg text-blue-700">Type of Event: ${selectionText}</h4>`;
+                    
+                    const directCausesForEvent = formData.page2Data[selectionText] || {};
+                    let directCauseAdded = false;
+
+                    for (const directCauseId in directCausesForEvent) {
+                        const directCauseData = directCausesForEvent[directCauseId];
+                        if (directCauseData.choice === 'NO') {
+                            directCauseAdded = true;
+                            const directCauseInfo = APP_DATA.page2Options.find(opt => opt.id == directCauseId);
+                            eventHTML += `<div class="mt-3 ml-4 pl-4 border-l-2 border-blue-200">`;
+                            eventHTML += `<p class="font-semibold text-gray-800">Direct Cause: ${directCauseInfo.text}</p>`;
+                            eventHTML += `<p class="text-sm text-gray-500 italic">Komentar: ${directCauseData.comment}</p>`;
+
+                            const rootCausesForDirectCause = formData.page3Data?.[selectionText]?.[directCauseId] || {};
+                            for (const rootCauseId in rootCausesForDirectCause) {
+                                const rootCauseData = rootCausesForDirectCause[rootCauseId];
+                                if (rootCauseData.choice === 'NO' && rootCauseData.subChoices && Object.keys(rootCauseData.subChoices).length > 0) {
+                                    const rootCauseInfo = APP_DATA.page3Options.find(opt => opt.id == rootCauseId);
+                                    eventHTML += `<div class="mt-3 ml-4 pl-4 border-l-2 border-gray-300">`;
+                                    eventHTML += `<p class="font-semibold text-gray-700">Root Cause: ${rootCauseInfo.text}</p>`;
+                                    
+                                    const subChoicesList = Object.entries(rootCauseData.subChoices).map(([subChoice, comment]) =>
+                                        `<li class="text-sm text-gray-600"><span class="font-semibold">${subChoice}:</span> ${comment}</li>`
+                                    ).join('');
+                                    eventHTML += `<p class="text-sm font-semibold text-gray-600 mt-2">Detail Sub-Pilihan:</p><ul class="list-disc list-inside mt-1">${subChoicesList}</ul>`;
+
+                                    const correctiveActionData = formData.page4Data?.[selectionText]?.[directCauseId]?.[rootCauseId];
+                                    if (correctiveActionData) {
+                                        eventHTML += `
+                                            <div class="mt-3 p-3 rounded-md bg-green-50 border border-green-200">
+                                                <p class="font-semibold text-green-800">Tindakan Perbaikan:</p>
+                                                <p class="text-sm text-gray-700">${correctiveActionData.correctiveAction}</p>
+                                                <p class="text-xs text-gray-600 mt-2"><b>PIC:</b> ${correctiveActionData.pic} | <b>Target:</b> ${correctiveActionData.targetDate}</p>
+                                            </div>
+                                        `;
+                                    }
+                                    eventHTML += `</div>`; // Close root cause div
+                                }
+                            }
+                            eventHTML += `</div>`; // Close direct cause div
+                        }
+                    }
+                    if (!directCauseAdded) {
+                        eventHTML += `<p class="mt-2 text-sm text-gray-500">Tidak ada Direct Cause yang relevan untuk dianalisis lebih lanjut dari event ini.</p>`;
+                    }
+                    eventHTML += `</div>`; // Close event div
+                    analysisHTML += eventHTML;
+                });
+                
+                reportHTML += `<div class="p-4 border rounded-lg"><h3 class="font-bold text-xl mb-2 text-gray-800">Analisis Penyebab & Tindakan Perbaikan</h3>${analysisHTML || '<p>Tidak ada data analisis untuk ditampilkan.</p>'}</div>`;
+                reportContainer.innerHTML = reportHTML;
+            }
+
+            function saveDataFromCurrentPage() {
+                if (currentPage === 1) {
+                    formData.description = descriptionTextarea.value;
+                    formData.page1Selections = Array.from(document.querySelectorAll('#page-1-options input:checked')).map(el => el.value);
+                } else if (currentPage === 2) {
+                    document.querySelectorAll('#page-2-sub-options-container [data-sub-opt-id]').forEach(el => {
+                        const selectionText = el.dataset.selectionText;
+                        const subOptId = el.dataset.subOptId;
+                        const choice = el.querySelector('input[type="radio"]:checked')?.value || '';
+                        const comment = el.querySelector('.comment-box').value;
+
+                        if (!formData.page2Data[selectionText]) formData.page2Data[selectionText] = {};
+                        formData.page2Data[selectionText][subOptId] = { choice, comment };
+                    });
+                } else if (currentPage === 3) {
+                     document.querySelectorAll('#page-3-sub-options-container [data-root-cause-id]').forEach(el => {
+                        const selectionText = el.dataset.selectionText;
+                        const directCauseId = el.dataset.directCauseId;
+                        const rootCauseId = el.dataset.rootCauseId;
+                        const choice = el.querySelector('input[name^="choice-"]:checked')?.value || '';
+                        
+                        const subChoices = {};
+                        if(choice === 'NO') {
+                            el.querySelectorAll('.sub-option-item input[type="checkbox"]:checked').forEach(checkbox => {
+                                const subOptText = checkbox.value;
+                                const commentTextarea = checkbox.closest('.sub-option-item').querySelector('textarea');
+                                subChoices[subOptText] = commentTextarea.value;
+                            });
+                        }
+
+                        if (!formData.page3Data[selectionText]) formData.page3Data[selectionText] = {};
+                        if (!formData.page3Data[selectionText][directCauseId]) formData.page3Data[selectionText][directCauseId] = {};
+                        formData.page3Data[selectionText][directCauseId][rootCauseId] = { choice, subChoices };
+                    });
+                } else if (currentPage === 4) {
+                    document.querySelectorAll('#page-4-sub-options-container [data-root-cause-id]').forEach(el => {
+                        const selectionText = el.dataset.selectionText;
+                        const directCauseId = el.dataset.directCauseId;
+                        const rootCauseId = el.dataset.rootCauseId;
+                        const correctiveAction = el.querySelector('textarea').value;
+                        const pic = el.querySelectorAll('input')[0].value;
+                        const targetDate = el.querySelectorAll('input')[1].value;
+
+                        if (!formData.page4Data[selectionText]) formData.page4Data[selectionText] = {};
+                        if (!formData.page4Data[selectionText][directCauseId]) formData.page4Data[selectionText][directCauseId] = {};
+                        formData.page4Data[selectionText][directCauseId][rootCauseId] = { correctiveAction, pic, targetDate };
+                    });
+                }
+                localStorage.setItem('incidentFormData', JSON.stringify(formData));
+            }
+            
+            function loadDataFromStorage() {
+                const savedData = localStorage.getItem('incidentFormData');
+                if (savedData) {
+                    formData = JSON.parse(savedData);
+                    if (!formData.page3Data) formData.page3Data = {};
+                    if (!formData.page4Data) formData.page4Data = {};
+                    descriptionTextarea.value = formData.description;
+                }
+            }
+
+            function validateCurrentPage() {
+                let isValid = true;
+                let message = '';
+                
+                if (currentPage === 1) {
+                    if (descriptionTextarea.value.trim() === '') {
+                        isValid = false;
+                        message = 'Kolom deskripsi insiden wajib diisi.';
+                        descriptionTextarea.focus();
+                        descriptionTextarea.classList.add('border-red-500', 'ring-red-500');
+                    } else if (formData.page1Selections.length === 0) {
+                        isValid = false;
+                        message = 'Anda harus memilih minimal satu "Type of Event" untuk melanjutkan.';
+                        descriptionTextarea.classList.remove('border-red-500', 'ring-red-500');
+                    } else {
+                         descriptionTextarea.classList.remove('border-red-500', 'ring-red-500');
+                    }
+                } else if (currentPage === 2) {
+                    const requiredFields = document.querySelectorAll('#page-2-sub-options-container textarea[required]');
+                    for (const field of requiredFields) {
+                        if (field.value.trim() === '') {
+                            isValid = false;
+                            message = 'Harap isi semua kolom komentar yang wajib (untuk pilihan YES atau NO).';
+                            field.focus();
+                            field.classList.add('border-red-500', 'ring-red-500');
+                            break;
+                        }
+                        field.classList.remove('border-red-500', 'ring-red-500');
+                    }
+                } else if (currentPage === 3) {
+                    const requiredFields = document.querySelectorAll('#page-3-sub-options-container textarea[required]');
+                     for (const field of requiredFields) {
+                        if (field.value.trim() === '') {
+                            isValid = false;
+                            message = 'Harap isi semua kolom komentar sub-pilihan yang wajib.';
+                            field.focus();
+                            field.classList.add('border-red-500', 'ring-red-500');
+                            break;
+                        }
+                        field.classList.remove('border-red-500', 'ring-red-500');
+                    }
+                }
+                 else if (currentPage === 4) {
+                    const requiredFields = document.querySelectorAll('#page-4-sub-options-container [required]');
+                     for (const field of requiredFields) {
+                        if (field.value.trim() === '') {
+                            isValid = false;
+                            message = 'Harap isi semua kolom Tindakan Perbaikan yang wajib.';
+                            field.focus();
+                            field.classList.add('border-red-500', 'ring-red-500');
+                            break;
+                        }
+                        field.classList.remove('border-red-500', 'ring-red-500');
+                    }
+                }
+
+                if (!isValid) {
+                    showModal(message);
+                }
+                return isValid;
+            }
+            
+            // === EVENT LISTENERS ===
+
+            nextBtn.addEventListener('click', () => {
+                saveDataFromCurrentPage();
+                if (!validateCurrentPage()) return;
+
+                if (currentPage === 1) {
+                    const currentSelections = new Set(formData.page1Selections);
+                    
+                    for (const key in formData.page2Data) {
+                        if (!currentSelections.has(key)) {
+                            delete formData.page2Data[key];
+                        }
+                    }
+                    for (const key in formData.page3Data) {
+                        if (!currentSelections.has(key)) {
+                            delete formData.page3Data[key];
+                        }
+                    }
+                    for (const key in formData.page4Data) {
+                        if (!currentSelections.has(key)) {
+                            delete formData.page4Data[key];
+                        }
+                    }
+                }
+
+
+                if (currentPage < totalPages) {
+                    if (currentPage === 1) setTimeout(renderPage2, 0); 
+                    else if (currentPage === 2) setTimeout(renderPage3, 0);
+                    else if (currentPage === 3) setTimeout(renderPage4, 0);
+                    else if (currentPage === 4) setTimeout(renderFinalReport, 0);
+                    showPage(currentPage + 1);
+                } else {
+                    window.print();
+                }
+            });
+
+            backBtn.addEventListener('click', () => {
+                if (currentPage > 1) {
+                    saveDataFromCurrentPage();
+                    showPage(currentPage - 1);
+                }
+            });
+
+            function handleInputChange(e) {
+                const target = e.target;
+                if (target.type === 'radio') {
+                    const parentDiv = target.closest('[data-sub-opt-id], [data-root-cause-id]');
+                    if (!parentDiv) return;
+
+                    if (parentDiv.hasAttribute('data-sub-opt-id')) {
+                        const commentContainer = parentDiv.querySelector('.comment-container');
+                        if (commentContainer) {
+                            const commentBox = commentContainer.querySelector('.comment-box');
+                            if (target.value === 'YES' || target.value === 'NO') {
+                                commentContainer.classList.add('visible');
+                                commentBox.setAttribute('required', true);
+                                setTimeout(() => commentBox.focus(), 300);
+                            } else {
+                                commentContainer.classList.remove('visible');
+                                commentBox.removeAttribute('required');
+                                commentBox.classList.remove('border-red-500', 'ring-red-500');
+                            }
+                        }
+                    }
+                    
+                    if (parentDiv.hasAttribute('data-root-cause-id')) {
+                        const subOptionsContainer = parentDiv.querySelector('.sub-options-container');
+                        if (subOptionsContainer) {
+                            if (target.value === 'NO') {
+                                subOptionsContainer.classList.add('visible');
+                            } else {
+                                subOptionsContainer.classList.remove('visible');
+                                subOptionsContainer.querySelectorAll('input[type="checkbox"]').forEach(checkbox => {
+                                    checkbox.checked = false;
+                                    checkbox.dispatchEvent(new Event('change', { bubbles: true }));
+                                });
+                            }
+                        }
+                    }
+                }
+                if(target.type === 'checkbox') {
+                    const parentItem = target.closest('.sub-option-item');
+                    if(!parentItem) return;
+
+                    const commentContainer = parentItem.querySelector('.comment-container');
+                    if (commentContainer) {
+                        const commentBox = commentContainer.querySelector('textarea');
+                        if(target.checked) {
+                            commentContainer.classList.add('visible');
+                            commentBox.setAttribute('required', true);
+                            setTimeout(() => commentBox.focus(), 300);
+                        } else {
+                            commentContainer.classList.remove('visible');
+                            commentBox.removeAttribute('required');
+                            commentBox.classList.remove('border-red-500', 'ring-red-500');
+                        }
+                    }
+                }
+            }
+
+            document.getElementById('form-pages').addEventListener('change', handleInputChange);
+            
+            closeModalBtn.addEventListener('click', hideModal);
+
+            // === INITIALIZATION ===
+            loadDataFromStorage();
+            renderPage1();
+            showPage(1);
+        });
+    </script>
+</body>
+</html>
