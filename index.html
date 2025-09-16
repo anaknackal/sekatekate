@@ -201,12 +201,28 @@
                         modalHeader: "Peringatan",
                         radio: { yes: "YA", no: "TIDAK", na: "N/A" },
                         comments: { commentPlaceholder: "Komentar (wajib diisi jika memilih YA atau TIDAK)", subCommentPlaceholder: "Komentar (wajib)" },
-                        report: { summaryMapTitle: "Peta Ringkasan Investigasi", incidentDesc: "Deskripsi Insiden", analysisTitle: "Analisis Rinci & Tindakan Perbaikan", eventType: "Jenis Kejadian", directCause: "Penyebab Langsung", rootCause: "Akar Masalah", comment: "Komentar:", subChoiceDetails: "Detail Sub-Pilihan:", correctiveAction: "Tindakan Perbaikan:", pic: "Penanggung Jawab:", target: "Target:", noDirectCause: "Tidak ada Penyebab Langsung yang relevan untuk dianalisis lebih lanjut dari kejadian ini.", noAnalysis: "Tidak ada data analisis untuk ditampilkan." }
+                        report: { 
+                            summaryMapTitle: "Peta Ringkasan Investigasi", 
+                            incidentDesc: "Deskripsi Insiden", 
+                            analysisTitle: "Analisis Rinci & Tindakan Perbaikan", 
+                            eventType: "Jenis Kejadian", 
+                            directCause: "Penyebab Langsung", 
+                            rootCause: "Akar Masalah", 
+                            comment: "Komentar:", 
+                            subChoiceDetails: "Detail Sub-Pilihan:", 
+                            correctiveAction: "Tindakan Perbaikan:", 
+                            pic: "Penanggung Jawab:", 
+                            target: "Target:", 
+                            noDirectCause: "Tidak ada Penyebab Langsung yang relevan untuk dianalisis lebih lanjut dari kejadian ini.", 
+                            noAnalysis: "Tidak ada data analisis untuk ditampilkan.",
+                            yesSummaryTitle: "Ringkasan Jawaban 'YA' (Kondisi Sesuai)",
+                            noYesAnswers: "Tidak ada jawaban 'YA' yang tercatat."
+                        }
                     },
                     validation: { descRequired: "Kolom deskripsi insiden wajib diisi.", eventRequired: 'Anda harus memilih minimal satu "Jenis Kejadian" untuk melanjutkan.', commentRequired: "Harap isi semua kolom komentar yang wajib (untuk pilihan YA atau TIDAK).", subCommentRequired: "Harap isi semua kolom komentar sub-pilihan yang wajib.", actionRequired: "Harap isi semua kolom Tindakan Perbaikan yang wajib." },
                     alerts: { email: "Fungsionalitas pengiriman email memerlukan backend.", word: "Fungsionalitas download Word memerlukan library tambahan." },
                     appData: {
-                       page1Options: ["Membentur/Menabrak (saat berjalan / benturan ringan / “adu banteng” / membentur tanah / tabrakan besar)", "Tertabrak oleh (benda yang bergerak)", "Jatuh dari ketinggian (orang / peralatan/ material)", "Jatuh di ketinggian yang sama (terpeleset / tersandung)", "Terjebak, tesangkut, atau terjepit ", "Kontak dengan suhu ekstrem (panas / dingin)", "Kontak dengan listrik", "Paparan kebisingan", "Paparan getaran", "Paparan radiasi pengion", "Tegangan mekanis berlebih (karena beban / tekanan berlebih)", "Kontak dengan zat atau paparan berbahaya (beracun / biologis / korosif / karsinogenik / virus)", "Kebocoran dari  penampungan", "Pelepasan ke lingkungan (ke udara / air / tanah)", "Kebakaran (pool fire / jet fire / flash fire)", "Ledakan (awan uap / debu / letusan tekanan / BLEVE)", "Kegagalan peralatan mekanis", "Kegagalan sistem kelistrikan", "Kegagalan instrumentasi / logika / loop", "Kegagalan struktur sipil", "Operasi abnormal / gangguan proses", "Proses / reaksi tidak stabil", "Keluhan pelanggan / pemangku kepentingan", "Tindak kekerasan"],
+                       page1Options: ["Membentur/Menabrak (saat berjalan / benturan ringan / “adu banteng” / membentur tanah / tabrakan besar)", "Tertabrak oleh (benda yang bergerak)", "Jatuh dari ketinggian (orang / peralatan/ material)", "Jatuh di ketinggian yang sama (terpeleset / tersandung)", "Terjebak, tesangkut, atau terjepit ", "Kontak dengan suhu ekstrem (panas / dingin)", "Kontak dengan listrik", "Paparan kebisingan", "Paparan getaran", "Paparan radiasi pengion", "Tegangan mekanis berlebih (karena beban / tekanan berlebih)", "Kontak dengan zat atau paparan berbahaya (beracun / biologis / korosif / karsogenik / virus)", "Kebocoran dari  penampungan", "Pelepasan ke lingkungan (ke udara / air / tanah)", "Kebakaran (pool fire / jet fire / flash fire)", "Ledakan (awan uap / debu / letusan tekanan / BLEVE)", "Kegagalan peralatan mekanis", "Kegagalan sistem kelistrikan", "Kegagalan instrumentasi / logika / loop", "Kegagalan struktur sipil", "Operasi abnormal / gangguan proses", "Proses / reaksi tidak stabil", "Keluhan pelanggan / pemangku kepentingan", "Tindak kekerasan"],
                         page2Options: [{ id: 1, text: "(Perilaku tidak aman) Apakah peralatan dioperasikan dengan kewenangan yang sesuai?" }, { id: 2, text: "(Perilaku tidak aman) Apakah informasi / peringatan diberikan dengan efektif?" }, { id: 3, text: "(Perilaku tidak aman) Apakah semuanya diamankan dengan benar?" }, { id: 4, text: "(Perilaku tidak aman) Apakah dioperasikan dengan kecepatan yang benar?" }, { id: 5, text: "(Perilaku tidak aman) Apakah perangkat keselamatan yang kritikal berfungsi?" }, { id: 6, text: "(Perilaku tidak aman) Apakah perkakas / peralatan / mesin / perangkat dalam kondisi baik?" }, { id: 7, text: "(Perilaku tidak aman) Apakah perkakas / peralatan / mesin / perangkat dioperasikan dengan benar?" }, { id: 8, text: "(Perilaku tidak aman) Apakah servis peralatan / mesin yang sedang beroperasi sudah memadai?" }, { id: 9, text: "(Perilaku tidak aman) Apakah material yang digunakan sudah benar / sesuai?" }, { id: 10, text: "(Perilaku tidak aman) Apakah alat pelindung diri digunakan dengan benar?" }, { id: 11, text: "(Perilaku tidak aman) Apakah pemuatan/ pengisian dilakukan dengan benar?" }, { id: 12, text: "(Perilaku tidak aman) Apakah penempatan dilakukan dengan benar?" }, { id: 13, text: "(Perilaku tidak aman) Apakah pengangkatan dilakukan dengan benar?" }, { id: 14, text: "(Perilaku tidak aman) Apakah posisi saat bekerja sudah sesuai?" }, { id: 15, text: "(Perilaku tidak aman) Apakah perilaku / tindakan / sikap sudah sesuai?" }, { id: 16, text: "(Perilaku tidak aman) Apakah terbebas dari pengaruh obat / alkohol / narkoba?" }, { id: 17, text: "(Perilaku tidak aman) Apakah prosedur / instruksi kerja aman diikuti?" }, { id: 18, text: "(Perilaku tidak aman) Apakah bahaya telah diidentifikasi?" }, { id: 19, text: "(Perilaku tidak aman) Apakah tindakan oleh pihak eksternal sudah sesuai aturan (tidak dibawah kontrol penuh)?" }, { id: 20, text: "(Perilaku tidak aman) Apakah persyaratan dari pelanggan / pemangku kepentingan telah diidentifikasi?" }, { id: 21, text: "(Perilaku tidak aman) Apakah persyaratan dari pelanggan / pemangku kepentingan dipatuhi?" }, { id: 22, text: "(Perilaku tidak aman) Apakah kondisi tertib sipil (tidak ada kerusuhan, keresahan, perang)?" }, { id: 23, text: "(Perilaku tidak aman) Apakah bukan aktivitas kriminal?" }, { id: 24, text: "(Kondisi tidak aman) Apakah kondisi lantai / permukaan memadai?" }, { id: 25, text: "(Kondisi tidak aman) Apakah perkakas / peralatan bebas dari kegagalan fungsi / komponennya?" }, { id: 26, text: "(Kondisi tidak aman) Apakah perkakas / peralatan sudah benar atau memadai?" }, { id: 27, text: "(Kondisi tidak aman) Apakah kondisi fisik / material peralatan memadai?" }, { id: 28, text: "(Kondisi tidak aman) Apakah deteksi / pengukuran dilakukan secara efektif?" }, { id: 29, text: "(Kondisi tidak aman) Apakah konversi / pengukuran sinyal sudah benar?" }, { id: 30, text: "(Kondisi tidak taan) Apakah material yang digunakan sudah benar?" }, { id: 31, text: "(Kondisi tidak aman) Apakah komposisi material / gas sudah benar?" }, { id: 32, text: "(Kondisi tidak aman) Apakah pelindung / penghalang sudah memadai?" }, { id: 33, text: "(Kondisi tidak aman) Apakah alat pelindung diri memadai / sesuai?" }, { id: 34, text: "(Kondisi tidak aman) Apakah kondisi ruang cukup / tidak terbatas untuk bergerak?" }, { id: 35, text: "(Kondisi tidak aman) Apakah sistem peringatan memadai?" }, { id: 36, text: "(Kondisi tidak aman) Apakah atmosfer bebas dari bahan yang mudah terbakar / meledak?" }, { id: 37, text: "(Kondisi tidak aman) Apakah bahan berbahaya yang ada sudah diotorisasi?" }, { id: 38, text: "(Kondisi tidak aman) Apakah kebersihan / ketertiban terpelihara dengan baik?" }, { id: 39, text: "(Kondisi tidak aman) Apakah tingkat kebisingan berada dalam ambang batas?" }, { id: 40, text: "(Kondisi tidak aman) Apakah bahaya radiasi berada dalam ambang batas?" }, { id: 41, text: "(Kondisi tidak aman) Apakah penerangan cukup dan tidak berlebihan?" }, { id: 42, text: "(Kondisi tidak aman) Apakah getaran berada dalam batas aman?" }, { id: 43, text: "(Kondisi tidak aman) Apakah suhu berada dalam batas wajar?" }, { id: 44, text: "(Kondisi tidak aman) Apakah tekanan berada dalam batas wajar?" }, { id: 45, text: "(Kondisi tidak aman) Apakah ventilasi memadai?" }, { id: 46, text: "(Kondisi tidak aman) Apakah informasi memadai?" }, { id: 47, text: "(Kondisi tidak aman) Apakah kondisi cuaca buruk sudah dihindari / dikelola?" }],
                         page3Options: [ { id: 1, text: "Apakah kemampuan fisik / fisiologis memadai / tidak ada kekurangan?", subOptions: ["Tinggi / berat / ukuran / kekuatan / jangkauan yang tidak sesuai, dll", "Rentang gerak tubuh terbatas", "Kemampuan terbatas / tidak mampu mempertahankan posisi tubuh", "Sensitivitas / alergi zat", "Sensitivitas terhadap sensorik ekstrem (suhu / suara / dll.)", "Kekurangan penglihatan", "Kekurangan pendengaran", "Kekurangan sensorik lainnya (sentuhan / rasa / bau / keseimbangan)", "Kemampuan pernapasan kurang", "Cacat fisik permanen lainnya", "Cacat sementara"] }, { id: 2, text: "Apakah kemampuan mental / psikologis memadai / tidak ada kekurangan?", subOptions: ["Ketakutan dan / atau fobia", "Gangguan emosional", "Penyakit mental", "Tingkat kecerdasan", "Ketidakmampuan / sulit untuk memahami", "Susah berkordinasi", "Lambat menanggapi sesuatu", "Sulit memamahi teknik mekanikal", "Sulit belajar sesuatu yang baru", "Sulit menyimpan / lemah ingatan"] }, { id: 3, text: "Apakah stres fisik / fisiologis dikelola dengan baik (bisa muncul dan hilang)?", subOptions: ["Cedera atau penyakit", "Kelelahan karena beban atau durasi tugas", "Kelelahan karena kurang istirahat", "Kelelahan karena kelebihan sensorik", "Paparan bahaya kesehatan", "Paparan suhu ekstrem", "Kekurangan oksigen", "Variasi tekanan atmosfer", "Gerakan terbatas", "Kekurangan gula darah", "Alkohol / Narkoba / Stres Akibat Diri Sendiri / Lainnya"] }, { id: 4, text: "Apakah stres mental / psikologis dikelola dengan baik (bisa muncul dan hilang)?", subOptions: ["Beban emosional berlebih", "Kelelahan mental karena beban atau waktu penyeleseaian tugas ", "Tuntutan penilaian / keputusan yang ekstrem", "Rutin / monoton / kebosanan / tugas yang terlalu rutin", "Tuntutan konsentrasi / persepsi ekstrem", "Aktivitas yang \"tidak berarti\" atau \"merendahkan\"", "Arahan / tuntutan yang membingungkan", "Tuntutan / arahan yang bertentangan", "Terpaku pada masalah / terganggu oleh kekhawatiran", "Frustrasi", "Penyakit mental"] }, { id: 5, text: "Apakah kompetensi mencukupi?", subOptions: ["Pengalaman tidak memadai", "Orientasi / induksi tidak memadai", "Pelatihan awal tidak memadai", "Pelatihan ulang atau tambahan tidak memadai", "Instruksi / informasi yang disalahpahami", "Kurangnya kesadaran situasional / persepsi risiko / kesadaran risiko", "Instruksi / pelatihan keterampilan awal tidak memadai", "Praktek tidak memadai", "Pekerjaan jarang dilakukan", "Pembinaan tidak memadai", "Instruksi tinjauan tidak memadai"] }, { id: 6, text: "Apakah motivasi sudah benar?", subOptions: ["Kinerja / perilaku yang tidak benar ditoleransi / dibiarkan", "Kinerja / perilaku yang benar dilarang / dicibir", "Kurangnya insentif", "Insentif produksi yang tidak pantas", "Insentif dari penghematan yang tidak pantas", "Frustrasi berlebihan", "Agresi/ prilaku yang tidak pantas", "Upaya yang tidak pantas untuk menghemat waktu / tenaga", "Upaya yang tidak pantas untuk menghindari ketidaknyamanan", "Upaya yang tidak pantas untuk mendapatkan perhatian", "Disiplin tidak memadai", "Tekanan teman selevel yang tidak pantas", "Contoh kepemimpinan yang tidak pantas", "Umpan balik kinerja tidak memadai", "Penguatan perilaku yang benar tidak memadai", "Penyalahgunaan (disengaja)", "Penggunaan yang salah (tidak disengaja)"] }, { id: 7, text: "Apakah struktur organisasi jelas?", subOptions: ["Hubungan pelaporan yang tidak jelas / bertentangan", "Penugasan fungsi / peran yang tidak jelas / bertentangan", "Akuntabilitas / tanggung jawab / tugas yang tidak jelas / bertentangan"] }, { id: 8, text: "Apakah kepemimpinan memadai?", subOptions: ["Strategi K3 / aset tidak memadai", "Pengembangan kepemimpinan tidak memadai", "Delegasi tidak memadai", "Standar tidak memadai", "Komunikasi / implementasi kebijakan / prosedur / praktik tidak memadai", "Kebijakan / prosedur / praktik yang bertentangan", "Perencanaan / pemrograman kerja / proses tidak memadai", "Memaafkan penyimpangan dari kebijakan / prosedur / praktik", "Memaafkan penyalahgunaan peralatan/perkakas", "Memaafkan perilaku yang tidak pantas / tidak semestinya", "Informasi manajemen tidak memadai", "Pemantauan / penutupan tindakan perbaikan audit tidak memadai"] }, { id: 9, text: "Apakah pengawasan / pembinaan memadai?", subOptions: ["Instruksi / orientasi / pelatihan tidak memadai", "Dokumen informasi dalam pengawasan / pembinaan tidak memadai", "Kurangnya pengetahuan pekerjaan pengawasan / manajemen", "Kecocokan yang tidak memadai antara kualifikasi dan persyaratan pekerjaan / tugas", "Pengukuran dan evaluasi kinerja tidak memadai", "Umpan balik kinerja tidak memadai"] }, { id: 10, text: "Apakah perubahan dikelola secara efektif?", subOptions: ["Identifikasi bahaya / evaluasi risiko dalam desain tidak memadai", "Identifikasi mode kegagalan tidak memadai", "Evaluasi persyaratan pelanggan / pemangku kepentingan tidak memadai", "Identifikasi persyaratan hukum tidak memadai", "Pertimbangan faktor manusia / ergonomi dalam desain tidak memadai", "Proses / standar / spesifikasi / kriteria desain tidak memadai", "Otomatisasi kontrol proses tidak memadai", "Standar / spesifikasi (teknis) yang tidak memadai atau tidak adanya", "Tinjauan risiko proyek tidak memadai", "Pemantauan konstruksi / fabrikasi / perakitan tidak memadai", "Penilaian kesiapan operasional tidak memadai", "Proses komisioning / serah terima tidak memadai", "Pemantauan operasi awal tidak memadai", "Proses manajemen perubahan tidak memadai"] }, { id: 11, text: "Apakah manajemen rantai pasokan memadai?", subOptions: ["Spesifikasi pada permintaan / pesanan pembelian tidak memadai", "Penelitian tentang bahan / peralatan / perkakas / pasokan / dll tidak memadai", "Spesifikasi kepada vendor tidak memadai", "Mode / rute pengiriman tidak memadai", "Komunikasi informasi tentang bahaya tidak memadai", "Inspeksi / penerimaan barang tidak memadai", "Penanganan material yang tidak benar", "Penyimpanan material yang tidak benar", "Pengangkutan material yang tidak benar", "Masa simpan / validasi untuk penggunaan kembali bahan / peralatan tidak memadai", "Identifikasi material tidak memadai", "Penyelamatan / pembuangan limbah yang tidak benar", "Pemilihan kontraktor / pemasok tidak memadai"] }, { id: 12, text: "Apakah pemeliharaan / inspeksi memadai?", subOptions: ["Penilaian kebutuhan pemeliharaan preventif tidak memadai", "Pelumasan dan servis preventif tidak memadai", "Penyesuaian / perakitan tidak memadai", "Pembersihan / pelapisan ulang preventif tidak memadai", "Komunikasi kebutuhan pemeliharaan korektif tidak memadai", "Penjadwalan pekerjaan pemeliharaan tidak memadai", "Penilaian kebutuhan perbaikan tidak memadai", "Penggantian / substitusi suku cadang tidak memadai", "Metode / interval inspeksi tidak memadai", "Tidak dapat diinspeksi"] }, { id: 13, text: "Apakah keausan / kerusakan berada dalam batas yang dapat diterima?", subOptions: ["Perencanaan penggunaan tidak memadai", "Keputusan yang tidak tepat tentang perpanjangan masa pakai", "Inspeksi / pemantauan tidak memadai", "Pemuatan / tingkat penggunaan yang tidak tepat", "Digunakan untuk tujuan / tugas / aktivitas yang salah"] }, { id: 14, text: "Apakah perkakas / peralatan / mesin / perangkat memadai?", subOptions: ["Penilaian kebutuhan dan risiko tidak memadai", "Pertimbangan faktor manusia / ergonomi tidak memadai", "Standar / spesifikasi (pemasok) tidak memadai", "Pengukuran / deteksi / kontrol (proses) yang salah", "Ketersediaan perkakas / peralatan / mesin / perangkat tidak memadai", "Inspeksi / perbaikan / pemeliharaan tidak memadai", "Penyesuaian / kalibrasi tidak memadai", "Penghapusan dan penggantian barang yang tidak sesuai tidak memadai"] }, { id: 15, text: "Apakah desain produk / layanan efektif?", subOptions: ["Penilaian kebutuhan dan risiko tidak memadai", "Sistem standar / spesifikasi / konsesi produk / layanan tidak memadai", "Desain / pengembangan produk / layanan tidak memadai", "Standar produk / layanan tidak memadai", "Validasi desain produk / layanan tidak memadai", "Verifikasi desain produk / layanan tidak memadai", "Perencanaan produk / layanan tidak memadai", "Verifikasi kualitas produk / layanan tidak memadai"] }, { id: 16, text: "Apakah standar kerja / produksi memadai?", subOptions: ["Identifikasi persyaratan (peraturan / kode industry / izin operasi) tidak memadai", "Identifikasi / evaluasi risiko dalam pengembangan standar tidak memadai", "Standar dari pemasok / kontraktor tidak memadai", "Koordinasi dengan desain proses saat mengembangkan standar tidak memadai", "Keterlibatan karyawan dalam mengembangkan standar tidak memadai", "Standar yang bertentangan / prioritas standar yang tidak tepat", "Publikasi standar tidak memadai", "Distribusi standar tidak memadai", "Terjemahan bahasa yang sesuai tidak memadai", "Penggunaan bahasa yang tidak tepat", "Pelatihan standar tidak memadai", "Penguatan standar dengan rambu, kode warna, dan alat bantu kerja tidak memadai", "Pemantauan kepatuhan standar tidak memadai"] }, { id: 17, text: "Apakah komunikasi / informasi efektif?", subOptions: ["Penanganan informasi tidak memadai", "Informasi tidak jelas", "Transfer informasi antar proses / unit organisasi tidak memadai", "Transfer informasi dengan klien / pemangku kepentingan tidak memadai", "Transfer informasi dengan pihak berwenang tidak memadai", "Transfer informasi dengan pemasok / kontraktor / pihak ketiga tidak memadai", "Struktur komunikasi tidak memadai", "Database / sistem informasi tidak memadai", "Metode / teknik komunikasi yang digunakan tidak memadai"] }]
 
@@ -226,7 +242,23 @@
                         modalHeader: "Warning",
                         radio: { yes: "YES", no: "NO", na: "N/A" },
                         comments: { commentPlaceholder: "Comment (required if YES or NO is selected)", subCommentPlaceholder: "Comment (required)" },
-                        report: { summaryMapTitle: "Investigation Summary Map", incidentDesc: "Incident Description", analysisTitle: "Detailed Analysis & Corrective Actions", eventType: "Type of Event", directCause: "Direct Cause", rootCause: "Root Cause", comment: "Comment:", subChoiceDetails: "Sub-Choice Details:", correctiveAction: "Corrective Action:", pic: "PIC:", target: "Target:", noDirectCause: "No relevant Direct Cause to analyze further for this event.", noAnalysis: "No analysis data to display." }
+                        report: { 
+                            summaryMapTitle: "Investigation Summary Map", 
+                            incidentDesc: "Incident Description", 
+                            analysisTitle: "Detailed Analysis & Corrective Actions", 
+                            eventType: "Type of Event", 
+                            directCause: "Direct Cause", 
+                            rootCause: "Root Cause", 
+                            comment: "Comment:", 
+                            subChoiceDetails: "Sub-Choice Details:", 
+                            correctiveAction: "Corrective Action:", 
+                            pic: "PIC:", 
+                            target: "Target:", 
+                            noDirectCause: "No relevant Direct Cause to analyze further for this event.", 
+                            noAnalysis: "No analysis data to display.",
+                            yesSummaryTitle: "'YES' Answer Summary (Conditions Met)",
+                            noYesAnswers: "No 'YES' answers were recorded."
+                        }
                     },
                     validation: { descRequired: "The incident description field is required.", eventRequired: 'You must select at least one "Type of Event" to continue.', commentRequired: "Please fill in all required comment fields (for YES or NO options).", subCommentRequired: "Please fill in all required sub-choice comment fields.", actionRequired: "Please fill in all required Corrective Action fields." },
                     alerts: { email: "Email functionality requires a backend.", word: "Word download functionality requires an additional library." },
@@ -518,7 +550,7 @@
                                 hasContentForSection = true;
                                 const directCauseInfo = APP_DATA.page2Options.find(opt => opt.id == p2Id);
                                 const rootCauseInfo = APP_DATA.page3Options.find(opt => opt.id == p3Id);
-                                const savedData = formData.page4Data?.[p1Index]?.[p2Id]?.[p3Id] || { correctiveAction: '', pic: '', targetDate: '' };
+                                const savedData = formData.page4Data?.[p1Index]?.[p2Id]?.[p3Id] || { correctiveAction: '' };
                                 
                                 const subChoicesList = Object.entries(rootCauseData.subChoices).map(([subIndex, comment]) => {
                                     const subChoiceText = rootCauseInfo.subOptions[subIndex];
@@ -543,14 +575,6 @@
                                         <div>
                                             <label class="block text-sm font-medium text-gray-700 mb-1">${ui.p4.correctiveAction}</label>
                                             <textarea class="w-full p-2 border border-gray-300 rounded-md text-sm" rows="3" required>${savedData.correctiveAction}</textarea>
-                                        </div>
-                                        <div>
-                                            <label class="block text-sm font-medium text-gray-700 mb-1">${ui.p4.pic}</label>
-                                            <input type="text" value="${savedData.pic}" class="w-full p-2 border border-gray-300 rounded-md text-sm" required>
-                                        </div>
-                                        <div>
-                                            <label class="block text-sm font-medium text-gray-700 mb-1">${ui.p4.targetDate}</label>
-                                            <input type="date" value="${savedData.targetDate}" class="w-full p-2 border border-gray-300 rounded-md text-sm" required>
                                         </div>
                                     </div>
                                 `;
@@ -609,44 +633,49 @@
 
                 const reportContainer = document.getElementById('final-report');
                 
-                // --- PEMBUATAN PETA RINGKASAN (MIND MAP) ---
-                let summaryMapHTML = `<div class="p-4 border rounded-lg bg-gray-50"><h3 class="font-bold text-xl mb-4 text-gray-800">${ui.report.summaryMapTitle}</h3>`;
-                summaryMapHTML += `<div class="mindmap"><div class="mindmap-node root text-sm">${formData.description}</div>`;
+                // --- BAGIAN BARU: PEMBUATAN RINGKASAN JAWABAN "YA" ---
+                let yesSummaryHTML = `<div class="p-4 border rounded-lg bg-yellow-50 border-yellow-200"><h3 class="font-bold text-xl mb-2 text-yellow-800">${ui.report.yesSummaryTitle}</h3>`;
+                let hasYesAnswers = false;
+                let yesContent = '';
 
-                let eventBranches = '';
                 formData.page1Selections.forEach(p1Index => {
-                    const p1Text = APP_DATA.page1Options[p1Index];
-                    let directCauseBranches = '';
-                    
+                    let eventYesContent = '';
+                    // Cek Jawaban 'YA' di Page 2
                     const directCausesForEvent = formData.page2Data[p1Index] || {};
-                    Object.keys(directCausesForEvent).forEach(p2Id => {
-                        if (directCausesForEvent[p2Id].choice === 'NO') {
+                    Object.entries(directCausesForEvent).forEach(([p2Id, p2Data]) => {
+                        if (p2Data.choice === 'YES') {
+                            hasYesAnswers = true;
                             const directCauseInfo = APP_DATA.page2Options.find(opt => opt.id == p2Id);
-                            if (!directCauseInfo) return; // Guard clause
-                            
-                            let rootCauseBranches = '';
-                            const rootCausesForDirectCause = formData.page3Data?.[p1Index]?.[p2Id] || {};
-                            Object.keys(rootCausesForDirectCause).forEach(p3Id => {
-                                const rootCauseData = rootCausesForDirectCause[p3Id];
-                                if (rootCauseData.choice === 'NO' && Object.keys(rootCauseData.subChoices).length > 0) {
-                                    const rootCauseInfo = APP_DATA.page3Options.find(opt => opt.id == p3Id);
-                                    if (!rootCauseInfo) return; // Guard clause
-
-                                    let subChoiceBranches = '';
-                                    Object.keys(rootCauseData.subChoices).forEach(subIndex => {
-                                        subChoiceBranches += `<div class="mindmap-branch"><div class="mindmap-node text-xs">${rootCauseInfo.subOptions[subIndex]}</div></div>`;
-                                    });
-
-                                    rootCauseBranches += `<div class="mindmap-branch"><div class="mindmap-node text-xs font-semibold">${rootCauseInfo.text}</div><div class="mindmap-children">${subChoiceBranches}</div></div>`;
-                                }
-                            });
-                            directCauseBranches += `<div class="mindmap-branch"><div class="mindmap-node text-sm">${directCauseInfo.text}</div><div class="mindmap-children">${rootCauseBranches}</div></div>`;
+                            eventYesContent += `<li class="text-sm"><span class="font-semibold">${directCauseInfo.text}</span>${p2Data.comment ? `: ${p2Data.comment}` : ''}</li>`;
                         }
                     });
-                    eventBranches += `<div class="mindmap-branch"><div class="mindmap-node font-bold">${p1Text}</div><div class="mindmap-children">${directCauseBranches}</div></div>`;
+
+                    // Cek Jawaban 'YA' di Page 3
+                    const rootCausesForEvent = formData.page3Data[p1Index] || {};
+                    Object.entries(rootCausesForEvent).forEach(([p2Id, p3Map]) => {
+                        Object.entries(p3Map).forEach(([p3Id, p3Data]) => {
+                            if (p3Data.choice === 'YES') {
+                                hasYesAnswers = true;
+                                const rootCauseInfo = APP_DATA.page3Options.find(opt => opt.id == p3Id);
+                                const directCauseInfo = APP_DATA.page2Options.find(opt => opt.id == p2Id);
+                                eventYesContent += `<li class="text-sm"><span class="font-semibold">${rootCauseInfo.text}</span> (terkait: ${directCauseInfo.text})</li>`;
+                            }
+                        });
+                    });
+
+                    if (eventYesContent) {
+                        const p1Text = APP_DATA.page1Options[p1Index];
+                        yesContent += `<div class="mt-2"><h4 class="font-semibold text-gray-700">${ui.report.eventType}: ${p1Text}</h4><ul class="list-disc list-inside ml-4 mt-1 space-y-1">${eventYesContent}</ul></div>`;
+                    }
                 });
 
-                summaryMapHTML += `<div class="mindmap-children">${eventBranches}</div></div></div>`;
+                if (hasYesAnswers) {
+                    yesSummaryHTML += yesContent;
+                } else {
+                    yesSummaryHTML += `<p class="text-sm text-gray-500">${ui.report.noYesAnswers}</p>`;
+                }
+                yesSummaryHTML += `</div>`;
+
 
                 // --- PEMBUATAN LAPORAN RINCI ---
                 let detailedReportHTML = `<div class="p-4 border rounded-lg bg-gray-50 mt-6"><h3 class="font-bold text-xl mb-2 text-gray-800">${ui.report.analysisTitle}</h3></div>`;
@@ -678,7 +707,6 @@
                                         eventHTML += `<div class="mt-3 p-3 rounded-md bg-green-50 border border-green-200">
                                             <p class="font-semibold text-green-800">${ui.report.correctiveAction}</p>
                                             <p class="text-sm text-gray-700">${correctiveActionData.correctiveAction}</p>
-                                            <p class="text-xs text-gray-600 mt-2"><b>${ui.report.pic}</b> ${correctiveActionData.pic} | <b>${ui.report.target}</b> ${correctiveActionData.targetDate}</p>
                                         </div>`;
                                     }
                                     eventHTML += `</div>`;
@@ -693,7 +721,7 @@
                 });
                 
                 detailedReportHTML += analysisHTML || `<p>${ui.report.noAnalysis}</p>`;
-                reportContainer.innerHTML = summaryMapHTML + detailedReportHTML;
+                reportContainer.innerHTML = yesSummaryHTML + detailedReportHTML;
             }
 
             // === DATA HANDLING ===
@@ -735,11 +763,9 @@
                         const p2Id = parseInt(el.dataset.p2Id);
                         const p3Id = parseInt(el.dataset.p3Id);
                         const correctiveAction = el.querySelector('textarea').value;
-                        const pic = el.querySelectorAll('input')[0].value;
-                        const targetDate = el.querySelectorAll('input')[1].value;
                         if (!formData.page4Data[p1Index]) formData.page4Data[p1Index] = {};
                         if (!formData.page4Data[p1Index][p2Id]) formData.page4Data[p1Index][p2Id] = {};
-                        formData.page4Data[p1Index][p2Id][p3Id] = { correctiveAction, pic, targetDate };
+                        formData.page4Data[p1Index][p2Id][p3Id] = { correctiveAction };
                     });
                 }
                 localStorage.setItem('incidentFormData', JSON.stringify(formData));
@@ -885,3 +911,4 @@
     </script>
 </body>
 </html>
+
